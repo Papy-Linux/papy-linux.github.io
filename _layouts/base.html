@@ -5,9 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <title>{{ page.title }} | Papy Linux</title>
 </head>
 <body>
+    <div id="polybar">
+        <div id="polybar-left">
+            <a href="/"><span class="material-icons">home</span></a>
+            <a style="cursor: pointer;" onclick="history.back()"><span class="material-icons">arrow_back</span></a>
+            <a style="cursor: pointer;" onclick="history.forward()"><span class="material-icons">arrow_forward</span></a>
+        </div>
+        <div id="polybar-center">
+            <span id="clock">12:00</span>
+        </div>
+        <div id="polybar-right">
+            <a style="cursor: pointer;" onclick="alert('Can\'t shutdown your computer xD')"><span class="material-icons">power_settings_new</span></a>
+        </div>
+    </div>
     <header>
         <a href="/">Home</a>
         <span class="flex-separator"></span>
@@ -16,5 +31,18 @@
         <a href="/download">Download</a>
     </header>
     {{ content }}
+    <script>
+        function startClock() {
+            var date = new Date();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            var time = h + ":" + m;
+            document.getElementById("clock").innerText = time;
+            setTimeout(startClock, 1000);
+        }
+        startClock();
+    </script>
 </body>
 </html>
